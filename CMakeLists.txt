@@ -19,6 +19,5 @@ add_executable(Chess_cpp
     pieces/rook.cpp
     pieces/pawn.h
     pieces/pawn.cpp
-
-
-    )
+    utils.h
+    exceptions.h)

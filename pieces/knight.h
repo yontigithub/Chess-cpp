@@ -10,7 +10,10 @@
 
 class Knight : Piece {
 public:
+    Knight(pos_t position, color_t color);
+
 private:
+    bool IsLegalMove(const pos_t& reached) const override;
 };
 
 #endif //CHESS_CPP_KNIGHT_H

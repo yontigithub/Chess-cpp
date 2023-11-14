@@ -14,4 +14,5 @@ bool Knight::IsLegalMove(const pos_t &reached) const {
     }
 
     // Implementation
+    // todo: write this part
 }

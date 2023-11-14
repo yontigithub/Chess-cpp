@@ -14,4 +14,9 @@ bool Queen::IsLegalMove(const pos_t &reached) const {
     }
 
     // Implementation
+
+    return ((reached != m_position)  &&
+           ((reached.first == m_position.first) ||
+            (reached.second == m_position.second) ||
+            abs(reached.first - m_position.first) == abs(reached.second - m_position.second)));
 }

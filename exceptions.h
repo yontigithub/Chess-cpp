@@ -5,7 +5,6 @@
 #ifndef CHESS_CPP_EXCEPTIONS_H
 #define CHESS_CPP_EXCEPTIONS_H
 
-#include <iostream>
 #include "utils.h"
 
 class InvalidPosition : std::exception {

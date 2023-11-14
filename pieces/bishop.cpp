@@ -14,4 +14,6 @@ bool Bishop::IsLegalMove(const pos_t &reached) const {
     }
 
     // Implementation
+
+    return ((reached != m_position)  && abs(reached.first - m_position.first) == abs(reached.second - m_position.second));
 }

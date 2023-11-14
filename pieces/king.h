@@ -5,15 +5,14 @@
 #ifndef CHESS_CPP_KING_H
 #define CHESS_CPP_KING_H
 
-#include <iostream>
 #include "piece.h"
 
 class King : Piece {
 public:
     King(pos_t position, color_t color);
+    bool IsLegalMove(const pos_t& reached) const override;
 
 private:
-    bool IsLegalMove(const pos_t& reached) const override;
 };
 
 #endif //CHESS_CPP_KING_H

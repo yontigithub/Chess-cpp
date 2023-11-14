@@ -14,4 +14,8 @@ bool King::IsLegalMove(const pos_t &reached) const {
     }
 
     // Implementation
+
+    return ((reached != m_position) &&
+            abs(reached.first - m_position.first) <= 1 &&
+            abs(reached.second - m_position.second) <= 1);
 }

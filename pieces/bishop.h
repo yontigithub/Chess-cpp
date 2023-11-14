@@ -11,9 +11,9 @@
 class Bishop : Piece {
 public:
     Bishop(pos_t position, color_t color);
+    bool IsLegalMove(const pos_t& reached) const override;
 
 private:
-    bool IsLegalMove(const pos_t& reached) const override;
 };
 
 #endif //CHESS_CPP_BISHOP_H

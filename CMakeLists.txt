@@ -5,19 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Chess_cpp
     main.cpp
-    pieces/piece.h
-    pieces/piece.cpp
-    pieces/knight.h
-    pieces/knight.cpp
-    pieces/bishop.h
-    pieces/bishop.cpp
-    pieces/king.h
-    pieces/king.cpp
-    pieces/queen.h
-    pieces/queen.cpp
-    pieces/rook.h
-    pieces/rook.cpp
-    pieces/pawn.h
-    pieces/pawn.cpp
     utils.h
-    exceptions.h)
+    Board.h
+    exceptions.h
+Board.h
+)

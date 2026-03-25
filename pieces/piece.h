@@ -5,7 +5,6 @@
 #ifndef CHESS_CPP_PIECE_H
 #define CHESS_CPP_PIECE_H
 
-#include "../utils.h"
 #include "../exceptions.h"
 
 class Piece {

@@ -5,6 +5,7 @@
 #ifndef CHESS_CPP_PAWN_H
 #define CHESS_CPP_PAWN_H
 
+
 #include "piece.h"
 
 class Pawn : Piece {

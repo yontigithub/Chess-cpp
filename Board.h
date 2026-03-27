@@ -13,7 +13,7 @@
 
 class Board {
 public:
-    Board() : turn_m(WHITE) {
+    Board() : turn_m(WHITE), white_king({4,0}), black_king({4,7}) {
         board_m[0][0] = new Piece(ROOK, WHITE);
         board_m[1][0] = new Piece(KNIGHT, WHITE);
         board_m[2][0] = new Piece(BISHOP, WHITE);
@@ -37,7 +37,9 @@ public:
             board_m[i][6] = new Piece(PAWN, BLACK);
         }
     }
-    void move(const pos_t& src, const pos_t& dst) {
+
+
+    void can_move(const pos_t& src, const pos_t&dst) { // throws exception if can't
         if (!IsValidPos(src)) throw InvalidPosition(src);
         if (!IsValidPos(dst)) throw InvalidPosition(dst);
 
@@ -60,6 +62,9 @@ public:
         } else if (type == KING) {
             if (abs(dst.second - src.second) > 1 || abs(dst.first - src.first) > 1) throw IllegalPieceMove("king");
             if (capture) delete board_m[dst.first][dst.second];
+            if (turn_m == WHITE) white_king = dst;
+            else black_king = dst;
+
         } else if (type == KNIGHT) {
             if ((abs(dst.second - src.second) != 1 || abs(dst.first - src.first) != 2) &&
                 (abs(dst.first - src.first) != 1 || abs(dst.second - src.second) != 2)) {
@@ -91,11 +96,15 @@ public:
             if (!checkEmpty(src,dst,board_m)) throw BlockedPath();
             if (capture) delete board_m[dst.first][dst.second];
         }
-
+    }
+    void move(const pos_t& src, const pos_t& dst) {
+        can_move(src, dst);
         board_m[dst.first][dst.second] = board_m[src.first][src.second];
         board_m[src.first][src.second] = nullptr;
         turn_m = (turn_m == WHITE ? BLACK : WHITE);
+
     }
+
     std::pair<pos_t, pos_t> getMove() {
         std::cout << (turn_m == WHITE ? "White" : "Black") << "'s turn: ";
         std::pair<pos_t, pos_t> a;
@@ -103,9 +112,35 @@ public:
         return a;
     }
 
+    bool isAttacked(const color_t& player, const pos_t& pos) {
+        // player - player that I am getting attacked
+
+        for (int x = 0; x < 8; ++x) {
+            for (int y = 0; y < 8; ++y) {
+                if (!board_m[x][y]) continue;
+                if (board_m[x][y]->color_m == player) continue;
+                try {
+                    can_move({x,y}, pos);
+                    return true;
+                } catch(...) {
+                    continue;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    bool isCheckMate(const color_t& player) {
+        pos_t king = (player == WHITE) ? white_king : black_king;
+        // remember to check for king captures
+    }
+
 private:
     Piece* board_m[8][8] = {};
     color_t turn_m;
+    pos_t white_king, black_king;
+
 
     friend std::ostream& operator<<(std::ostream& os, const Board& b) {
         for (int y = 7; y >= 0; --y) {
